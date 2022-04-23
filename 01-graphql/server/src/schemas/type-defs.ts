@@ -9,6 +9,7 @@ export const typeDefs = gql`
 
 	type Mutation {
 		create_user(input: CreateUserInput!): User!
+		create_post(input: CreatePostInput!): Post!
 	}
 
 	type User {
@@ -27,6 +28,11 @@ export const typeDefs = gql`
 		title: String!
 		body: String!
 		author: User!
+	}
+	input CreatePostInput {
+		authorId: String!
+		title: String!
+		body: String!
 	}
 	
 `;

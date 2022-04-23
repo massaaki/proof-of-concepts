@@ -2,6 +2,10 @@ import { MongoDbClient } from '../mongodb-client';
 import { Post } from '../../../interfaces/post';
 import { User } from '../../../interfaces/user';
 
+type CreatePostProps = {
+	authorId: string;
+} & Omit<Post, 'id' | 'comments' | 'author'>;
+
 export class PostRepository {
 	private client = MongoDbClient.getInstance();
 
@@ -20,8 +24,39 @@ export class PostRepository {
 				body
 			}
 		});
-
 		return posts;
+	}
+
+	async create({ authorId, title, body }: CreatePostProps): Promise<Post> {
+		
+		const authorExists = await this.client.user.findFirst({
+			where: {
+				id: authorId
+			}
+		});
+
+		if (!authorExists) {
+			return null;
+		}
+		
+		const newPost = await this.client.post.create({
+			data: {
+				title,
+				body,
+				authorId
+			},
+			include: {
+				author: true
+			}
+		});
+		
+
+		return {
+			id: newPost.id,
+			author: newPost.author,
+			title: newPost.title,
+			body: newPost.body
+		};
 	}
 
 }
