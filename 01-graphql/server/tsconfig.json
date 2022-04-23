@@ -8,11 +8,6 @@
 			"DOM"
 		],
 		"baseUrl": ".",
-		"paths": {
-			"@/*": [
-				"./src/*"
-			]
-		},
 		"sourceMap": true,
 		"removeComments": true,
 		"esModuleInterop": true,
