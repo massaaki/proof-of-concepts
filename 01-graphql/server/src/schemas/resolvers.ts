@@ -30,6 +30,14 @@ export const resolvers = {
 			if (!post)
 				return null;
 			return post;
+		},
+		find_post: async (parent, { id }, context) => {
+			const postRepository = new PostRepository();
+			const post = await postRepository.find(id);
+
+			if (!post)
+				return null;
+			return post;
 		}
 	},
 	Mutation: {

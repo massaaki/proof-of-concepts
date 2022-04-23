@@ -5,6 +5,7 @@ export const typeDefs = gql`
 		list_users: [User!]!
 		find_user(id: ID!): User
 		list_posts: [Post]!
+		find_post(id: ID!): Post
 	}
 
 	type Mutation {

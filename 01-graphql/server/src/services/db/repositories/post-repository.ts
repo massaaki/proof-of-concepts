@@ -27,6 +27,19 @@ export class PostRepository {
 		return posts;
 	}
 
+	async find(id: string): Promise<Post> {
+		const post = await this.client.post.findFirst({
+			where: {
+				id
+			},
+			include: {
+				author: true
+			}
+		});
+
+		return post;
+	}
+
 	async create({ authorId, title, body }: CreatePostProps): Promise<Post> {
 		
 		const authorExists = await this.client.user.findFirst({
