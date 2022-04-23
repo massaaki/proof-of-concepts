@@ -1,5 +1,11 @@
 import { User } from "@prisma/client";
+import { Post } from "../interfaces/post";
+import { PostRepository } from "../services/db/repositories/post-repository";
 import { UserRepository } from "../services/db/repositories/user-repository";
+
+type CreatePostInput = {
+	authorId: string;
+} & Omit<Post, 'id' | 'comments' | 'author'>;
 
 export const resolvers = {
 	Query: {
@@ -16,6 +22,22 @@ export const resolvers = {
 			if (!user)
 				return null;
 			return user;
+		},
+		list_posts: async (parent, args, context) => {
+			const postRepository = new PostRepository();
+			const post = await postRepository.findAll();
+
+			if (!post)
+				return null;
+			return post;
+		},
+		find_post: async (parent, { id }, context) => {
+			const postRepository = new PostRepository();
+			const post = await postRepository.find(id);
+
+			if (!post)
+				return null;
+			return post;
 		}
 	},
 	Mutation: {
@@ -25,6 +47,16 @@ export const resolvers = {
 			const userRepository = new UserRepository();
 			const user = await userRepository.create({ email, name });
 			return user;
+		},
+		create_post: async (parent, {input}, context) => {
+			const { authorId, title, body } = input as CreatePostInput;
+
+			const postRepository = new PostRepository();
+			const post = await postRepository.create({
+				authorId, title, body
+			});
+
+			return post;
 		}
 	}
 };
