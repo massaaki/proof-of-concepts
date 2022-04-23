@@ -1,4 +1,5 @@
 import { User } from "@prisma/client";
+import { PostRepository } from "../services/db/repositories/post-repository";
 import { UserRepository } from "../services/db/repositories/user-repository";
 
 export const resolvers = {
@@ -16,6 +17,14 @@ export const resolvers = {
 			if (!user)
 				return null;
 			return user;
+		},
+		list_posts: async (parent, args, context) => {
+			const postRepository = new PostRepository();
+			const post = await postRepository.findAll();
+
+			if (!post)
+				return null;
+			return post;
 		}
 	},
 	Mutation: {
