@@ -5,9 +5,9 @@
 		"module": "commonjs",
 		"lib": [
 			"ES6",
-			"DOM"
+			"DOM",
+			"ESNext"
 		],
-		"baseUrl": ".",
 		"sourceMap": true,
 		"removeComments": true,
 		"esModuleInterop": true,
