@@ -1,13 +1,15 @@
-version: '3.7'
+version: "3.8"
+
 services:
-  mongodb:
-    image: mongo:5
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: secret
+  pg_database:
+    image: postgres
+    container_name: pgdatabase
+    restart: always
     ports:
-      - 27017:27017
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=mydatabase
     volumes:
-      - mongodb_data:/data/db
-volumes:
-  mongodb_data:
+      - ./pgdata:/data/postgres
