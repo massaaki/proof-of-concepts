@@ -18,6 +18,19 @@ export class UserRepository {
 		return users;
 	}
 
+	async find(id: string): Promise<User> {
+		const user = await this.client.user.findFirst({
+			where: {
+				id
+			}
+		});
+
+		if (!user)
+			return null;
+
+		return user;
+	}
+
 	async create({ email, name }: Omit<User, 'id'>): Promise<User> {
 		const userExists = await this.client.user.findFirst({
 			where: {

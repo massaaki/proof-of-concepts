@@ -8,6 +8,14 @@ export const resolvers = {
 			const users = await userRepository.findAll();
 
 			return users;
+		},
+		find_user: async (parent, { id }, context) => {
+			const userRepository = new UserRepository();
+			const user = await userRepository.find(id);
+
+			if (!user)
+				return null;
+			return user;
 		}
 	},
 	Mutation: {
