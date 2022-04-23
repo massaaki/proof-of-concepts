@@ -8,7 +8,6 @@
 			"DOM",
 			"ESNext"
 		],
-		"baseUrl": ".",
 		"sourceMap": true,
 		"removeComments": true,
 		"esModuleInterop": true,
