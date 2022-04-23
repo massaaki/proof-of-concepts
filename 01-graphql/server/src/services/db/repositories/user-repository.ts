@@ -18,5 +18,27 @@ export class UserRepository {
 		return users;
 	}
 
-	
+	async create({ email, name }: Omit<User, 'id'>): Promise<User> {
+		const userExists = await this.client.user.findFirst({
+			where: {
+				email
+			}
+		});
+
+		if (userExists) 
+			return null;
+		
+		const newUser = await this.client.user.create({
+			data: {
+				email,
+				name
+			}
+		});
+
+		if (!newUser)
+			return null;
+
+		return newUser;
+	}
+
 }
