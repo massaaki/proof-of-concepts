@@ -1,4 +1,5 @@
 import { User } from "@prisma/client";
+import { Comment } from "../interfaces/comment";
 import { Post } from "../interfaces/post";
 import { CommentRepository } from "../services/db/repositories/comment-repository";
 import { PostRepository } from "../services/db/repositories/post-repository";
@@ -68,6 +69,14 @@ export const resolvers = {
 			});
 
 			return post;
+		},
+		create_comment: async (parent, { input }, context) => {
+			const { comment, postId } = input as Omit<Comment, 'id'>
+			
+			const commentRepository = new CommentRepository();
+			const response = await commentRepository.create({ comment, postId });
+
+			return response;
 		}
 	}
 };

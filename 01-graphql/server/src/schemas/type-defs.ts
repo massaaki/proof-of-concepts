@@ -12,6 +12,7 @@ export const typeDefs = gql`
 	type Mutation {
 		create_user(input: CreateUserInput!): User!
 		create_post(input: CreatePostInput!): Post!
+		create_comment(input: CreateCommentInput!): Comment!
 	}
 
 	type User {
@@ -42,5 +43,10 @@ export const typeDefs = gql`
 		id: String!
 		comment: String!
 		postId: String!
-	}	
+	}
+	
+	input CreateCommentInput {
+		comment: String!
+		postId: String!
+	}
 `;

@@ -14,4 +14,18 @@ export class CommentRepository {
 		}));
 		return comments;
 	}
+
+	async create({comment, postId}: Omit<Comment, 'id'>): Promise<Comment> {
+		const newComment = await this.client.comment.create({
+			data: {
+				comment,
+				postId
+			}
+		});
+
+		if (!newComment)
+			return null;
+		
+		return newComment;
+	}
 }
