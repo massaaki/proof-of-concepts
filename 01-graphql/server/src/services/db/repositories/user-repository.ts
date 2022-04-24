@@ -1,8 +1,8 @@
 import { User } from "../../../interfaces/user";
-import { MongoDbClient } from "../mongodb-client";
+import { DbClient } from "../db-client";
 
 export class UserRepository {
-	private client = MongoDbClient.getInstance();
+	private client = DbClient.getInstance();
 
 	async findAll(): Promise<User[]> {
 		const response = await this.client.user.findMany();

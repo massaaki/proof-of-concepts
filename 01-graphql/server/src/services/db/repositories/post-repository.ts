@@ -1,4 +1,4 @@
-import { MongoDbClient } from '../mongodb-client';
+import { DbClient } from '../db-client';
 import { Post } from '../../../interfaces/post';
 import { User } from '../../../interfaces/user';
 
@@ -7,7 +7,7 @@ type CreatePostProps = {
 } & Omit<Post, 'id' | 'comments' | 'author'>;
 
 export class PostRepository {
-	private client = MongoDbClient.getInstance();
+	private client = DbClient.getInstance();
 
 	async findAll() : Promise<Post[]> {
 		const response = await this.client.post.findMany({
