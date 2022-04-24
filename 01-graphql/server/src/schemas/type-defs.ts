@@ -32,6 +32,7 @@ export const typeDefs = gql`
 		title: String!
 		body: String!
 		author: User!
+		comments: [Comment!]
 	}
 
 	input CreatePostInput {

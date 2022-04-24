@@ -33,7 +33,8 @@ export class PostRepository {
 				id
 			},
 			include: {
-				author: true
+				author: true,
+				comments: true
 			}
 		});
 
