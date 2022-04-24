@@ -49,6 +49,15 @@ export const resolvers = {
 				return null;
 			
 			return comments;
+		},
+		find_comment: async (parent, { id }, context) => {
+			const commentRepository = new CommentRepository();
+
+			const comment = await commentRepository.find(id);
+
+			if (!comment)
+				return null;
+			return comment;
 		}
 
 	},

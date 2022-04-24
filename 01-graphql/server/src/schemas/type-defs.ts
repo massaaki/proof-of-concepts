@@ -7,6 +7,7 @@ export const typeDefs = gql`
 		list_posts: [Post]!
 		find_post(id: ID!): Post
 		list_comments: [Comment!]!
+		find_comment(id: ID!): Comment
 	}
 
 	type Mutation {

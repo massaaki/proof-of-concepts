@@ -15,6 +15,15 @@ export class CommentRepository {
 		return comments;
 	}
 
+	async find(id: string): Promise<Comment> {
+		const response = this.client.comment.findFirst({
+			where: {
+				id
+			}
+		});
+		return response;
+	}
+
 	async create({comment, postId}: Omit<Comment, 'id'>): Promise<Comment> {
 		const newComment = await this.client.comment.create({
 			data: {
