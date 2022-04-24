@@ -1,5 +1,6 @@
 import { User } from "@prisma/client";
 import { Post } from "../interfaces/post";
+import { CommentRepository } from "../services/db/repositories/comment-repository";
 import { PostRepository } from "../services/db/repositories/post-repository";
 import { UserRepository } from "../services/db/repositories/user-repository";
 
@@ -38,7 +39,17 @@ export const resolvers = {
 			if (!post)
 				return null;
 			return post;
+		},
+		list_comments: async (parent, args, context) => {
+			const commentRepository = new CommentRepository();
+			const comments = await commentRepository.findAll();
+
+			if (!comments)
+				return null;
+			
+			return comments;
 		}
+
 	},
 	Mutation: {
 		create_user: async (parent, {input}, context) => {

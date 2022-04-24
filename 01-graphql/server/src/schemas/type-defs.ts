@@ -6,6 +6,7 @@ export const typeDefs = gql`
 		find_user(id: ID!): User
 		list_posts: [Post]!
 		find_post(id: ID!): Post
+		list_comments: [Comment!]!
 	}
 
 	type Mutation {
@@ -30,10 +31,16 @@ export const typeDefs = gql`
 		body: String!
 		author: User!
 	}
+
 	input CreatePostInput {
 		authorId: String!
 		title: String!
 		body: String!
 	}
-	
+
+	type Comment {
+		id: String!
+		comment: String!
+		postId: String!
+	}	
 `;
