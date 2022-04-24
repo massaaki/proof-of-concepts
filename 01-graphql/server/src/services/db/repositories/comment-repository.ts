@@ -24,6 +24,16 @@ export class CommentRepository {
 		return response;
 	}
 
+	async getCommentsByPostId(postId: string) {
+		const comments = await this.client.comment.findMany({
+			where: {
+				postId
+			}
+		});
+		return comments;
+	}
+
+
 	async create({comment, postId}: Omit<Comment, 'id'>): Promise<Comment> {
 		const newComment = await this.client.comment.create({
 			data: {

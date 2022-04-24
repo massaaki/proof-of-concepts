@@ -31,10 +31,6 @@ export class PostRepository {
 		const post = await this.client.post.findFirst({
 			where: {
 				id
-			},
-			include: {
-				author: true,
-				comments: true
 			}
 		});
 

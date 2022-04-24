@@ -52,6 +52,19 @@ export const resolvers = {
 			return comment;
 		}
 	},
+	// Post Relation
+	Post: {
+		comments: async (parent, args, { commentRepository }: Context) => {
+			const { id: postId } = parent;
+			const comments = await commentRepository.getCommentsByPostId(postId);
+			return comments;
+		},
+		author: async (parent, args, {userRepository}: Context) => {
+			const { authorId } = parent;
+			const author = await userRepository.find(authorId);
+			return author;
+		}
+	},
 	Mutation: {
 		create_user: async (parent, { input }, { userRepository }: Context) => {
 			const {name, email} = input as Omit<User, 'id'>;
