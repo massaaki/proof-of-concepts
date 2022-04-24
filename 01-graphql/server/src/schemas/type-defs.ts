@@ -20,6 +20,7 @@ export const typeDefs = gql`
 		id: String!
 		name: String!
 		email: String!
+		posts: [Post!]
 	}
 
 	input CreateUserInput {

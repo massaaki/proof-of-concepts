@@ -65,6 +65,13 @@ export const resolvers = {
 			return author;
 		}
 	},
+	User: {
+		posts: async (parent, args, { postRepository }: Context) => {
+			const { id: userId } = parent;
+			const posts = postRepository.getPostsByUserId(userId);
+			return posts;
+		}
+	},
 	Mutation: {
 		create_user: async (parent, { input }, { userRepository }: Context) => {
 			const {name, email} = input as Omit<User, 'id'>;
